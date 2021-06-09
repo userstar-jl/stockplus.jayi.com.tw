@@ -1,0 +1,41 @@
+A{
+TEXT-DECORATION: none;
+}
+
+A:hover {
+	COLOR: #0000ff; FONT-FAMILY: ""
+}
+A:active {
+	COLOR: #ff0000; FONT-FAMILY: ""
+}
+A:link {
+	FONT-FAMILY: ""
+}
+A:visited {
+	FONT-FAMILY: ""
+}
+A.none {
+	TEXT-DECORATION: none;
+}
+
+.list_table{
+	background-color:#fec003;
+}
+
+.list_td{
+	background-color:#FFFFFF;
+	}
+	
+.dataCellFocus{
+	background-color:#FDEFD6;
+	}
+	
+.dataCell{
+	background-color:#FFFFFF;
+	}
+
+.list_title{
+	 font-size:16px;
+	 height:20px;
+	 background-image:url(../images/icon/titleBar_bg2.gif);
+	}

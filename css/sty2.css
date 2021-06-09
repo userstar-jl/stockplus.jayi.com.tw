@@ -1,0 +1,32 @@
+A{
+TEXT-DECORATION: none;
+}
+
+A:hover {
+	COLOR: #0000ff; FONT-FAMILY: ""
+}
+A:active {
+	COLOR: #ff0000; FONT-FAMILY: ""
+}
+A:link {
+	FONT-FAMILY: ""
+}
+A:visited {
+	FONT-FAMILY: ""
+}
+A.none {
+	TEXT-DECORATION: none;
+}
+
+.list_table{
+	background-color:#fec003;
+	border-spacing: 1px;
+}
+
+.list_td1{
+	background-color:#fff0c1;
+	}
+
+.list_td2{
+	background-color:#FFFFFF;
+	}

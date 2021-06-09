@@ -1,0 +1,44 @@
+<html lang="en">
+    <head>
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        
+	<meta name="google-signin-client_id" content="478564264192-v8apkpg9t2k69cg8nmk3acdgteln433h.apps.googleusercontent.com">
+        <title>Apple Sign In With Firebase</title>
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        
+    </head>
+    <body>  
+        <a id="line_login" class="icon-42line" href="">line_login</a><br>
+        <a id="google_login" class="icon-42line" href="">google_login</a><br>
+        <a id="facebook_login" class="icon-42line" href="">facebook_login</a><br>
+        <a id="apple_login" class="icon-42line" href="">Apple_login</a><br>
+        <!-- js -->
+        
+        <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+        <script src="https://www.gstatic.com/firebasejs/7.10.0/firebase-app.js"></script>
+        <!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
+        <script src="https://www.gstatic.com/firebasejs/7.10.0/firebase-analytics.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.10.0/firebase-auth.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.10.0/firebase-firestore.js"></script>
+
+        <script type="text/javascript" src="third_party_login.js"></script>
+        <script src="https://apis.google.com/js/api:client.js"></script>
+        <script>
+          // Your web app's Firebase configuration
+          var firebaseConfig = {
+            apiKey: "AIzaSyAPSz6MDNrZlpRdfzT47LLJOHuGH2iaARE",
+            authDomain: "oqrticket-afbf1.firebaseapp.com",
+            databaseURL: "https://oqrticket-afbf1.firebaseio.com",
+            projectId: "oqrticket-afbf1",
+            storageBucket: "oqrticket-afbf1.appspot.com",
+            messagingSenderId: "977555326347",
+            appId: "1:977555326347:web:66a59cfd575a63a7d51b8e",
+            measurementId: "G-DMFJQ7CWY0"
+          };
+          // Initialize Firebase
+          firebase.initializeApp(firebaseConfig);
+          firebase.analytics();
+
+        </script>
+    </body>
+</html>

@@ -1,0 +1,89 @@
+<html lang="en">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+    <head>
+        
+        
+    </head>
+    <body>  
+      <hr>
+      Info<br>
+      databaseURL:(JL測試用)https://oqr-jl.firebaseio.com
+      <hr>
+      <button id = "googleSingUpPopup">google(Popup)</button>
+      <button id = "singUpRedirect">google(Redirect)</button>
+
+        <!--在使用任何 Firebase 服務之前，請先複製這些指令碼並貼到 <body> 標記的最下方處： -->
+        <!-- The core Firebase JS SDK is always required and must be listed first -->
+        <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-app.js"></script>
+
+        <!-- TODO: Add SDKs for Firebase products that you want to use
+            https://firebase.google.com/docs/web/setup#available-libraries -->
+        <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-analytics.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-auth.js"></script>
+        <script>
+          // Your web app's Firebase configuration
+          var firebaseConfig = {
+            apiKey: "AIzaSyBT4Zc0u_PWyk4LU6Zufgn1HCoghQ_mJ20",
+            authDomain: "oqr-jl.firebaseapp.com",
+            databaseURL: "https://oqr-jl.firebaseio.com",
+            projectId: "oqr-jl",
+            storageBucket: "oqr-jl.appspot.com",
+            messagingSenderId: "265773138600",
+            appId: "1:265773138600:web:bb5ced22563553dcf5f89d",
+            measurementId: "G-L9N4QEKXST"
+          };
+          // Initialize Firebase
+          firebase.initializeApp(firebaseConfig);
+          firebase.analytics();
+          console.log(firebase.app().appId);
+          var provider = new firebase.auth.GoogleAuthProvider();
+          var btnGooglePopup = document.getElementById('googleSingUpPopup');
+
+          btnGooglePopup.onclick = function() {
+            // firebase.auth().signInWithPopup(provider).then(function(result) {
+            //   // 可以獲得 Google 提供 token，token可透過 Google API 獲得其他數據。  
+            //   var token = result.credential.accessToken;
+            //   var user = result.user;
+            // });  
+            firebase.auth().signInWithPopup(provider).then(function(result) {
+                // This gives you a Google Access Token. You can use it to access the Google API.
+                var token = result.credential.accessToken;
+                // The signed-in user info.
+                var user = result.user;
+                console.log("user", user);
+                name = user.displayName;
+                email = user.email;
+                photoUrl = user.photoURL;
+                emailVerified = user.emailVerified;
+                uid = user.uid;
+                
+                console.log("Signed in: " + uid
+                                + "\nFull Name: " + name
+                                // + "\nGiven Name: " + profile.getGivenName()
+                                // + "\nFamily Name: " + profile.getFamilyName()
+                                + "\nImage URL: " + photoUrl
+                                + "\nEmail: " + email);
+                        alert("Signed in: " + uid
+                                + "\nFull Name: " + name
+                                // + "\nGiven Name: " + profile.getGivenName()
+                                // + "\nFamily Name: " + profile.getFamilyName()
+                                + "\nImage URL: " + photoUrl
+                                + "\nEmail: " + email);
+                // ...
+              }).catch(function(error) {
+                // Handle Errors here.
+                var errorCode = error.code;
+                var errorMessage = error.message;
+                console.log("errorCode", errorMessage);
+                // The email of the user's account used.
+                var email = error.email;
+                console.log("email", email);
+                // The firebase.auth.AuthCredential type that was used.
+                var credential = error.credential;
+                // ...
+              });
+          }
+        </script>
+    </body>
+</html>

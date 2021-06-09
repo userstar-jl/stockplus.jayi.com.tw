@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css">
+  <!--
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+  -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+  <!-- firebaseui --> 
+  <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+  <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
+  
+
+</head>
+
+<body>
+
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-analytics.js"></script>
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyCiuLl1X04_c6-cx_pR-721Me9bgZzV_2U",
+    authDomain: "lamb-6464c.firebaseapp.com",
+    databaseURL: "https://lamb-6464c.firebaseio.com",
+    projectId: "lamb-6464c",
+    storageBucket: "lamb-6464c.appspot.com",
+    messagingSenderId: "144484551486",
+    appId: "1:144484551486:web:aebf5db0fc94ee0e29ba6f",
+    measurementId: "G-MLLF8BK7G4"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
+
+  <h1>Welcome to My Awesome App</h1>
+<button id="facebookSingUpPopup" class="fb">使用facebook註冊(Popup)</button>
+<button id="facebookSingUpRedirect" class="fb">使用facebook註冊(Redirect)</button>
+
+</html>

@@ -1,0 +1,100 @@
+<html>
+    <head>
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta name="google-signin-client_id" content="478564264192-v8apkpg9t2k69cg8nmk3acdgteln433h.apps.googleusercontent.com">
+        <title>TT</title>
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+        <script src="https://www.gstatic.com/firebasejs/7.13.2/firebase-app.js"></script>
+        <!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
+        <script src="https://www.gstatic.com/firebasejs/7.13.2/firebase-analytics.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.13.2/firebase-auth.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.13.2/firebase-firestore.js"></script>
+        <script>
+            var firebaseConfig = {
+            apiKey: "AIzaSyAhCrBrNVlOPl_3fwoqgARcTDkklTXVQvk",
+            authDomain: "pgm-ticket.firebaseapp.com",
+            databaseURL: "https://pgm-ticket.firebaseio.com",
+            projectId: "pgm-ticket",
+            storageBucket: "pgm-ticket.appspot.com",
+            messagingSenderId: "142518532583",
+            appId: "1:142518532583:web:b645bb7acb9f8b169f2542",
+            measurementId: "G-LTPXP17T2D"
+          };
+          // Initialize Firebase
+          firebase.initializeApp(firebaseConfig);
+          firebase.analytics();
+            console.log("qq");
+          $(document).ready(function () {
+            console.log("11");var provider;
+            $("#google_login").click(function() {
+                provider = new firebase.auth.GoogleAuthProvider();
+                firebaseLogin();
+            });
+            
+            $("#facebook_login").click(function() {
+                provider = new firebase.auth.FacebookAuthProvider();
+                firebaseLogin();
+            });
+            
+            $("#apple_login").click(function() {
+                console.log("apple_login:" + apple_login)
+                //provider = new firebase.auth.FacebookAuthProvider();
+                //var provider = new firebase.auth.OAuthProvider('apple.com');
+                // provider.addScope('email');
+                // provider.addScope('name');
+                // console.log("provider:" + provider)
+                // firebaseLogin();
+            });
+            console.log("22");
+            //
+            function firebaseLogin() {
+        //    	firebase.auth().signOut().then(function() {
+        //		  // Sign-out successful.
+        //		}).catch(function(error) {
+        //		  // An error happened.
+        //		});
+                firebase.auth().signInWithPopup(provider).then(function(result) {
+                    // This gives you a Facebook/Google Access Token. You can use it to access the Official API.
+                    var token = result.credential.accessToken;
+                    // The signed-in user info.
+                    var user = firebase.auth().currentUser;
+                    var name, email, photoUrl, uid, emailVerified;
+            
+                    if (user != null) {
+                        name = user.displayName;
+                        email = user.email;
+                        photoUrl = user.photoURL;
+                        emailVerified = user.emailVerified;
+                        uid = user.uid;
+                        alert("Signed in: " + uid
+                                + "\nFull Name: " + name
+                                // + "\nGiven Name: " + profile.getGivenName()
+                                // + "\nFamily Name: " + profile.getFamilyName()
+                                + "\nImage URL: " + photoUrl
+                                + "\nEmail: " + email);
+                    }}).catch(function(error) {
+                        // Handle Errors here.
+                        var errorCode = error.code;
+                        var errorMessage = error.message;
+                        // The email of the user's account used.
+                        var email = error.email;
+                        // The firebase.auth.AuthCredential type that was used.
+                        var credential = error.credential;
+                        // ...
+                    });
+            }
+            //
+          });
+            console.log("3");
+        </script>
+    </head>
+    <body>
+        <body>  
+            <a id="line_login" class="icon-42line" href="">line_login</a><br>
+            <a id="google_login" class="icon-42line" href="">google_login</a><br>
+            <a id="facebook_login" class="icon-42line" href="">facebook_login</a><br>
+            <a id="apple_login" class="icon-42line" href="">Apple_login</a><br>
+        </body>
+    </body>
+</html>
