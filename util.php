@@ -1,7 +1,7 @@
 ﻿<?php
 //include_once("../class/big5_func/big5_func.inc");
-include_once("../class/simple_html_dom.php");
-include_once("../class/dBug.php");
+// include_once("../class/simple_html_dom.php");
+// include_once("../class/dBug.php");
 function get_tid($table_name)
 {
 	$id=date("YmdHis");
@@ -265,12 +265,13 @@ function toIds($stk_code){
 	//echo("<hr>".$sql."<hr>");
 	$result=mysql_query($sql);
 	$row=mysql_fetch_row($result);
+	$ids="";
 	while($row!=NULL){
 		list($stock_code,$stock_type)=$row;
 		if($stock_type=="0"){//上市 tse
-			$ids=$ids."tse_".$stocks.$stock_code.",";
+			$ids=$ids."tse_".$stock_code.",";
 		}else if($stock_type=="1"){//上櫃 otc
-			$ids=$ids."otc_".$stocks.$stock_code.",";
+			$ids=$ids."otc_".$stock_code.",";
 		}
 		$row=mysql_fetch_row($result);
 	}

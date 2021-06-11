@@ -9,9 +9,9 @@ session_start();  //啟動 session
 //$images_repos = "/var/www/i.jayi.com.tw/images_repos/";
 //$images_url = "http://i.jayi.com.tw:888/images_repos/";
 
-$dbhost = 'localhost';
-$dbname = 'lambshop';
-$dbuser = 'root';
+$dbhost = '192.168.1.13';
+$dbname = 'stock_sys';
+$dbuser = 'j20521007';// Remote DB not allow root
 $dbpasswd = 'j10551055';
 
 $link=mysql_connect($dbhost,$dbuser,$dbpasswd) or die ("無法連接");
