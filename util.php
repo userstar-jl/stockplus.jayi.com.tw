@@ -347,4 +347,14 @@ function get_img_src($content)
 	*/
 	return (json_encode($result));
 }
+
+function getAPI($url){
+	$handle = fopen($url,"rb");
+	$content = "";
+	while (!feof($handle)) {
+			$content .= fread($handle, 10000);
+	}
+	fclose($handle);
+	return json_decode($content);
+}
 ?>

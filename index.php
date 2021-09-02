@@ -7,6 +7,7 @@ include("config.php");
 // 			else
 // 				header("Location: iframe.php");
 // }
+$url = $_GET['url'];
 if ( isset($_POST['id']) )
 {
 	$login_id = $_POST['id'];
@@ -48,13 +49,16 @@ if ( isset($_POST['id']) )
 			$agent = $_SERVER['HTTP_USER_AGENT'];
 			// echo $agent;
 			// return;
-			if(strpos($agent,"Kindle"))
-				header("Location: FeatureList.php");
-			else if(strpos($agent,"NetFront") || strpos($agent,"iPhone") || strpos($agent,"MIDP-2.0") || strpos($agent,"Opera Mini") || strpos($agent,"UCWEB") || strpos($agent,"Android") || strpos($agent,"Windows CE") || strpos($agent,"SymbianOS"))
-				header("Location: FeatureList.php");
-			else
-				header("Location: FeatureList.php");
-			
+			if(isset($_GET['url'])){
+				header("Location: " . $_GET['url']);
+			}else{
+				if(strpos($agent,"Kindle"))
+					header("Location: FeatureList.php");
+				else if(strpos($agent,"NetFront") || strpos($agent,"iPhone") || strpos($agent,"MIDP-2.0") || strpos($agent,"Opera Mini") || strpos($agent,"UCWEB") || strpos($agent,"Android") || strpos($agent,"Windows CE") || strpos($agent,"SymbianOS"))
+					header("Location: FeatureList.php");
+				else
+					header("Location: FeatureList.php");
+			}
 		}
 		else
 			$err_msg="帳號或密碼錯誤!!";
@@ -62,6 +66,12 @@ if ( isset($_POST['id']) )
 	else
 		$err_msg="帳號或密碼錯誤!!";
 
+	$err_msg="<div class=\"alert alert-warning alert-dismissible fade show\" role=\"alert\">\n\n
+	<strong>Warning</strong>$err_msg \n\n
+	<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">\n\n
+	<span aria-hidden=\"true\">&times;</span>\n\n
+	</button>\n\n
+	</div>\n\n";
 }
 ?>
 <!doctype html>
@@ -70,7 +80,7 @@ if ( isset($_POST['id']) )
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
-    <title>四湖羊肉小舖 Signin</title>
+    <title>Stock Plus Signin</title>
     <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/sign-in/">
 
 	<!-- Bootstrap core CSS -->
@@ -98,21 +108,49 @@ if ( isset($_POST['id']) )
 	</style>
     <!-- Custom styles for this template -->
     <link href="css/signin.css" rel="stylesheet">
+
+	<script type="text/javascript" src="js/jquery-3.4.1.min.js" charset="utf-8"></script>
+	<script type="text/javascript" src="js/jquery.cookie.js"></script>
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+	<script language="javascript">
+	$(document).ready(function(){
+		console.log("cookie('id'):" + $.cookie("id"));
+		if($.cookie("id")&&$.cookie("pw")){
+			$('#inputUserId').val($.cookie("id"));
+			$('#inputPassword').val($.cookie("pw"));
+		}else{
+		}
+		$('#remember').change(function () {
+			console.log($('#remember').prop("checked"));
+		});
+			
+	})
+
+
+	function chk_data(){
+		if ($('#remember').is(":checked")){
+			$.cookie("id", $('#inputUserId').val(),{ expires: 30, path: '/'});
+			$.cookie("pw", $('#inputPassword').val(),{ expires: 30, path: '/'});
+		}
+		return true;
+	}
+	</script>
   </head>
   <body class="text-center">
-  <?=$err_msg?>
-    <form class="form-signin" method="post" action="">
+    <form class="form-signin" method="post" action="" onSubmit="return chk_data();">
   <img class="mb-4" src="https://getbootstrap.com/docs/4.5/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
   <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+  <?=$err_msg?>
   <label for="inputUserId" class="sr-only">帳號</label>
   <input type="text" name="id" id="inputUserId" class="form-control" placeholder="帳號" required autofocus>
   <label for="inputPassword" class="sr-only">密碼</label>
   <input type="password" name="pw" id="inputPassword" class="form-control" placeholder="密碼" required>
   <div class="checkbox mb-3">
     <label>
-      <input type="checkbox" value="remember-me"> Remember me
+      <input type="checkbox" id="remember" value="remember-me"> Remember me
     </label>
   </div>
+  <input type="hidden" name="url" id="url" value="<?=$url?>">
   <button class="btn btn-lg btn-primary btn-block" type="submit">登入</button>
   <p class="mt-5 mb-3 text-muted">&copy; 2017-2020</p>
 </form>

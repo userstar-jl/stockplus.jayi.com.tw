@@ -23,11 +23,11 @@ if( strlen($ex_right_date) == 8){
 	$ex_right_date_b=date("Ymd",strtotime($ex_right_date));
     $ex_right_date_e=date("Ymd",strtotime('+1 day',strtotime($ex_right_date)));
 
-    $sql = "select * from stk_084_dr_data where ex_right_date between '$ex_right_date_b' and '$ex_right_date_e' order by ex_right_date desc, stk_code;";
+    $sql = "select * from stk_084_dr_data where LENGTH(stk_code)=4 and ex_right_date between '$ex_right_date_b' and '$ex_right_date_e' order by ex_right_date desc, stk_code;";
 
 }else if( strlen($ex_right_date) == 4){
     // 查詢年度
-    $sql = "select * from stk_084_dr_data where ex_right_date like '$ex_right_date%' order by ex_right_date, stk_code;";
+    $sql = "select * from stk_084_dr_data where LENGTH(stk_code)=4 and ex_right_date like '$ex_right_date%' order by ex_right_date, stk_code;";
 }
 //echo $sql;
 $result=mysql_query($sql);
@@ -106,7 +106,7 @@ $(document).ready(function(){
 
     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">111</h1>
+        <h1 class="h2">除權息預告表</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
           <div class="btn-group mr-2">
             <button type="button" id="addProductBtn" class="btn btn-sm btn-outline-secondary">新增</button>
@@ -125,15 +125,18 @@ $(document).ready(function(){
 			//echo("NO");
 		}
 		if($i==5){
-          if($_SESSION['OpenOrNot']){
-            $OpenOrNotTitle = " 開市";
-          }else{
-            $OpenOrNotTitle = " 休市";
-          }
-        	echo "<h1><a href='ExrightAnnouncement.php?ex_right_date=".date("Ymd",strtotime(($i-5).'day',strtotime($ex_right_date)))."' target='_blank'><b>".date("Y/m/d",strtotime(($i-5).'day',strtotime($ex_right_date)))."</b></a> $OpenOrNotTitle</h1> &nbsp;&nbsp;";
-        }else{
-        	echo "<a href='ExrightAnnouncement.php?ex_right_date=".date("Ymd",strtotime(($i-5).'day',strtotime($ex_right_date)))."' target='_blank'><b>".date("Y/m/d",strtotime(($i-5).'day',strtotime($ex_right_date)))."</b></a>&nbsp;&nbsp;";
-        }
+      $jsonObj = getAPI('http://py.jayi.com.tw:888/market_status.py?d=20210621');
+      // echo 'market_status:'.var_dump($jsonObj);
+      // $jsonObj["MarketStatus"]["DateOpenOrNot"]
+      if($jsonObj->{"MarketStatus"}->{"DateOpenOrNot"}){
+        $OpenOrNotTitle = " 開市";
+      }else{
+        $OpenOrNotTitle = " 休市";
+      }
+      echo "<h1><a href='ExrightAnnouncement.php?ex_right_date=".date("Ymd",strtotime(($i-5).'day',strtotime($ex_right_date)))."' target='_blank'><b>".date("Y/m/d",strtotime(($i-5).'day',strtotime($ex_right_date)))."</b></a> $OpenOrNotTitle</h1> &nbsp;&nbsp;";
+    }else{
+      echo "<a href='ExrightAnnouncement.php?ex_right_date=".date("Ymd",strtotime(($i-5).'day',strtotime($ex_right_date)))."' target='_blank'><b>".date("Y/m/d",strtotime(($i-5).'day',strtotime($ex_right_date)))."</b></a>&nbsp;&nbsp;";
+    }
 		$i++;
 	}
 	?>
@@ -143,9 +146,9 @@ $(document).ready(function(){
           <thead>
             <tr>
               <th>日期</th>
-              <th>日期</th>
               <th>除息</th>
               <th>除權</th>
+              <th>股號/股名</th>
               <th>現價</th>
               <th>漲幅</th>
             </tr>
@@ -171,7 +174,7 @@ $(document).ready(function(){
                 <td>$ex_right_date</td>
                 <td>$CashDividend</td>
                 <td>$StockDividend</td>
-                <td><a href="../stock_group/stock_detail.php?stk_code=$stk_code" target='_blank'><b>$stk_code&nbsp;$stk_name&nbsp;</b></a></td>
+                <td><a href="http://stock.jayi.com.tw/stock_group/stock_detail.php?stk_code=$stk_code" target='_blank'><b>$stk_code&nbsp;$stk_name&nbsp;</b></a></td>
                 <td><div id='price$stk_code'>Loading...</div></td>
                 <td><div id='pfp$stk_code'>Loading...</div></td>
                 </tr>
